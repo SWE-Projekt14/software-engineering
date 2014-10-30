@@ -61,36 +61,35 @@
 		\item \underline{Hochschulen:}\\
 	Das System soll transparent für verschiedene Hochschulen verwendet werden.  Die Bewertungskriterien sind einfach anpassbar an die jeweiligen Hochschulverordnungen. Zusätzlich sind individuelle Bewertungskriterien stets möglich.
 			
-		\item \underline{Sekretärin:}\\
-	Die Sekretärin Benötigt zugriff auf das System um die Score auslesen zu können. Die Scores werden in einem Archiv abgespeichert und für 10 Jahre hinterlegt. 	
+		\item \underline{Verwaltung:}\\
+	Die Verwaltung benötigt Zugriff auf das System um die Score auslesen zu können. Diese werden in einem Archiv abgespeichert und für 10 Jahre hinterlegt. 	
 		
 	\end{itemize}
 
 	\section{Betriebsbedingungen}
+	
 	\begin{itemize}
-	\item \underline{Physikalische Umgebung: Mobiler Laptop Einsatz} \\
-	Der Prüfer sollte den Client immer Verfügbar haben. Dieser sollte mobil auf einem Laptop funktionieren. Die Datenbank abfragen befinden sich auf einem Server. Später sollte es möglich sein, per Webbrowser auf die Anwendung zuzugreifen.
+	\item \underline{Physikalische Umgebung:}\\
+	Die Software soll später auf jedem Computer lauffähig sein. Die Datenbank mit API wird auf einem Server installiert. Somit besteht die Möglichkeit, dass mehrere Personen gleichzeitig Zugriff auf die Daten haben. Über ein kleines Programm kann der Prüfer sich mit der Datenbank verbinden und darauf zuzugreifen.
 	
-	\item \underline{Tägliche Betriebszeit: dauerhaft} \\
-	Der Server sollte dauerhaft verfügbar sein, damit der Prüfer ständig auf die Anwendung zugreifen kann. 
-	
-	\item \underline{Betrieb: Unbeaufsichtigter Betrieb} \\
-	Sobald der Server einmal installiert ist, sollte das System ohne weitere Konfigurationen funktionieren. Der Prüfer sollte sich nicht mit der Konfiguration des System belasten müssten. 
-	
+	\item \underline{Tägliche Betriebszeit:} \\
+	Der Server auf dem die Daten hinterlegt sind muss immer verfügbar sein, damit die Prüfer wie auch die Prüflinge jederzeit mit der Anwendung Zugriff haben.
+		
+	\item \underline{Betrieb:} \\
+	Es ist ein unbeaufsichtigter Betrieb vorgesehen. Sobald der Server einmal installiert ist, sollte das System ohne weitere Konfigurationen funktionieren. Der Prüfer sollte sich nicht mit der Konfiguration des System belasten müssten. 	
 	\end{itemize}
 	
 \chapter{Produktübersicht}
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.99\textwidth]{../Use_Case.pdf}
+		\includegraphics[width=0.99\textwidth]{../Diagramme/Use_Case.pdf}
 		\caption{Use-Case Szenario}
 	\end{figure}
 
-	
 \chapter{Produktfunktionen}
 	\begin{figure}[H]
 		\centering
-		\includegraphics[height=0.8\textheight]{../Beispielprozess.pdf}
+		\includegraphics[height=0.8\textheight]{../Diagramme/Beispielprozess.pdf}
 		\caption{Beispielprozess einer Bewertung}
 	\end{figure}
 	
