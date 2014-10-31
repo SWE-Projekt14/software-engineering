@@ -127,13 +127,10 @@
 		\item 	Effizienz:\\
 		Ausschlaggebend ist die Effizienz nicht, da das Bewertungssystem nicht besonders schnell die Score abrufen und verarbeiten muss. \\
 		
-		\item Änderbarkeit:
-		
+		\item Änderbarkeit:		
 		Für die Zukunft können weitere Features eingebaut werden, wenn man möchte. Grundsteine für weitere Features werden nicht gezielt gelegt.\\
-		
-			
+					
 		\item  Übertragbarkeit:
-		
 		Die Übertragbarkeit spielt eine untergeordnete Rolle, da man nur drauf zugreifen muss. Installieren oder ähnliches muss nicht getan werden. \\
 			
 	\end{itemize}
@@ -146,24 +143,30 @@
 	\end{itemize}
 	
 \chapter{Technische Produktumgebung}
-	Auf dem Server wird eine CoucDB-Datenbank verwendet. Auf der Clientseite wird ein Java – Programm installiert. Da wir in der Vergangenheit sehr gute Ergebnisse mit Java und einer CouchDB-Datenbank erzielt haben werden wir dies auch bei diesem Projekt verwenden.
+	Auf dem Server wird eine CouchDB-Datenbank verwendet. Auf der Clientseite wird ein Java–Programm installiert. Da wir in der Vergangenheit sehr gute Ergebnisse mit Java erzielt haben und eine CouchDB-Datenbank für dieses Projekt sehr sinnvoll erscheint, da es mit der Datenmenge gut zurrecht kommt und noch performant genug ist.
 	
 	\section{Software}
 	\begin{itemize}
-		\item Betriebssystem : Windows 7, Windows 8, Windows 8.1
-		\item Laufzeitsystem: JRE
-		\item Datenbank: CouchDB
+		\item Betriebssystem : Windows 7, Windows 8, Windows 8.1, Mac OS X
+		\item Laufzeitsystem: Als Laufzeitsystem wird ein \ac{JRE} benötigt, welches für die meisten Betriebssysteme von Oracle zur Verfügung gestellt wird. \footnote{http://www.oracle.com/technetwork/java/index.html}
+		\item Datenbank: Apache CouchDB\footnote{http://couchdb.apache.org}\\
+			Apache CouchDB ist ein NoSQL Datenbanksystem von Apache, welche mittels \ac{JSON} die einzelnen Dokumente hinterlegt. Als API stellt CouchDB \ac{HTTP} zur Verfügung. Daher ist CouchDB speziell für Anwendungen entwickelt, welche mit dem Internet verbunden sind und über dieses kommunizieren. CouchDB kann einfach mittels den von Apache bereitgestellten Paketen auf jedem System installiert werden. Es wird Windows, Linux wie auch Mac OSX unterstützt. 
 		\item Client: Java Programm
+			Als Clientsoftware wird ein Java-Programm benötigt. Es wird Java verwendet, da es auf den meisten Geräten läuft.
 	\end{itemize}
 
 	\section{Hardware}
 	\begin{itemize}
-		\item Mindestanforderungen für CouchDB: 32-Bit Betriebssystem
-		\item Mindestanforderungen für Client: JRE, Windows 7
+		\item \underline{Server:} \\
+			Die Hardware des Servers muss performant genug sein, um die  	CouchDB lauffähig auf dem System zu halten. Es wird mindestens ein 32-Bit Betriebssystem benötigt.
+		
+		\item \underline{Client:}\\
+			Die Mindestanforderungen für die Clients sind ein lauffähiges \ac{JRE}, welches auf den meisten Betriebssystemen von Oracle zur Verfügung gestellt wird.
 	\end{itemize}
 
 	\section{Orgware}
-	Internet Zugang
+	Der Server muss mit dem Internet verbunden sein. Es wird empfohlen dies über eine synchrone Standleitung (10TBit/s) zu realisieren, um immer verfügbar zu sein.\\
+	Die Clients müssen ebenfalls mit dem Internet verbunden sein. Es wird mindestens 2Mbit/s empfohlen.
 	
 	\section{Produkt-Schnittstellen}
 	Anbindung von Java und CoucDB über JSON.
@@ -175,12 +178,11 @@
 	\section{Hardware}
 	Windows 7\\
 	
-	MacBook Pro 13"
-	\begin{itemize}
-		\item OS: Mac OSX 10.10
-		\item Intel Core2Duo
-	\end{itemize}
-	Mac OSX 10.10
+	\textbf{	MacBook Pro (13 Zoll, Mitte 2009)}\\
+	\textbf{Prozessor} 	\quad 2,26GHz Intel Core 2 Duo\\
+	\textbf{Speicher} 	\quad 4GB 1067 MHz DDR3\\
+	\textbf{Betriebsystem}\quad OSX 10.Yosemite
+
 	
 	\section{Orgware}
 	Internet Zugang
@@ -222,6 +224,9 @@
 			% Acronym mit \acro hinzu
 			\acro{API}{Application Programming Interface (Programmierschnittstelle)}
 			\acro{Add-On}{Erweiterungspaket}
+			\acro{JRE}{Java Runtime Environement}
+			\acro{JSON}{JavaScript Object Notation}
+			\acro{HTTP}{Hypertext Transfer Protocol}
 		\end{acronym}
 	
 	% Abbildungsverzeichnis
