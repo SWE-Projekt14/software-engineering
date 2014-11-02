@@ -20,17 +20,19 @@ public class CouchDBConnection {
 		  .setConnectionTimeout(0);
 		
 		CouchDbClient server = new CouchDbClient(properties);
-//		JsonObject root = new JsonObject();
-//		root.addProperty("_id", "hanswurst");
-//		root.addProperty("alter", 50);
-//		server.save(root);
+		JsonObject root = new JsonObject();
+		root.addProperty("_id", "Fabi");
+		root.addProperty("alter", 70);
+		server.save(root);
 		
 		JsonObject jo = server.find(JsonObject.class, "hanswurst");
 		System.out.println(jo.toString());
 		String revnr = jo.get("_rev").toString().replace("\"","");
 		String idnr = jo.get("_id").toString().replace("\"", "");
+		String alter = jo.get("alter").toString().replace("\"","");
+		System.out.println(alter);
 		System.out.println(revnr);
-		server.remove(idnr, revnr);
+//		server.remove(idnr, revnr);
 //		jo.remove("_rev");
 //		jo.addProperty("_id", "test");
 //		jo.addProperty("alter", 50);
