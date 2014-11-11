@@ -9,7 +9,7 @@ public class ScOREOs {
 		
 	}
 	
-	public v
+	
 	
 	public CouchDbProperties setConnectionSettings(String dbName,
 													String dbUserName,
