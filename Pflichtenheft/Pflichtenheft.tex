@@ -36,7 +36,7 @@
 	\tableofcontents
 	
 \chapter{Zielbestimmung}
-	Das im Folgenden beschriebene Programm soll die Grundlage für ein Bewertungssystem für Prüfer sein. Mit diesem System soll eine gerechte und einfache Bewertung ermöglicht werden. Dies wird sichergestellt indem die einzelnen Bewertungen auf einen gemeinsamen Score umgerechnet werden. Durch verschiedene Gewichtungen der Scores ergibt sich die Möglichkeit einzelne Bewertungen stärker zu werten als andere. Eine weitere Funktionalität des Programmes soll es dem Prüfer ermöglichen zum Score ebenfalls eine Rückmeldung anzuhängen um dem Prüfling ein Feedback zu geben. Genau so soll der Prüfling (ggf. Student) ein Feedback anfordern können um eine Begründung zu für seine Bewertung erhalten zu können.
+	Das im Folgenden beschriebene Programm soll die Grundlage für ein Bewertungssystem für Prüfer sein. Mit diesem System soll eine gerechte und einfache Bewertung ermöglicht werden. Dies wird sichergestellt indem die einzelnen Bewertungen auf einen gemeinsamen Score umgerechnet werden. Zusätzlich ist dieses System so aufgebaut, dass es sich sehr leicht an neuen Prüfungsbedingungen anpassen lässt. Durch verschiedene Gewichtungen der Scores ergibt sich die Möglichkeit einzelne Bewertungen stärker zu werten als andere. Eine weitere Funktionalität des Programmes soll es dem Prüfer ermöglichen zum Score ebenfalls eine Rückmeldung anzuhängen um dem Prüfling ein Feedback zu geben. Genau so soll der Prüfling (ggf. Student) ein Feedback anfordern können um eine Begründung zu für seine Bewertung erhalten zu können.
 	
 	\section{Musskriterien}
 	Die Software muss eine korrekte Umrechnung der Bewertungen in gültige Scores beherrschen, welche die Prüfer eintragen. Da es sich bei diesen um teilweise sensible Daten handelt, müssen diese gut geschützt sein, sodass sie von außerhalb nicht verändert werden können. Dieses Programm bietet die Möglichkeit durch ein zweistufiges holistisches Bewertungssystem die Bewertungen einzutragen. Bei diesem zweistufigen System kann der Prüfer die Stufen selbst so gewichten wie er es für sinnvoll hält. Mehrere Bewertungen können miteinander verrechnet und einzeln gewichtet werden. Am Ende soll der Prüfer ein Score bekommen, welcher sich aus seinen Bewertungen und Gewichtungen errechnen lässt. Die Software muss auf Windows PCs lauffähig sein, da dies die am meisten verwendete Laufzeitumgebung ist. Des weiteren muss das System einfach zu bedienen sein. Der Prüfer muss die Ergebnis seiner Bewertung einfach an die Studenten weiter geben können. Dies kann durch einen Ausdruck dieser statt finden wie auch durch ein eigenes Programm welches den Studenten Zugriff auf die jeweiligen Scores liefert. Umrechnung von der Inversen muss auch voll funktionsfähig sein. 
@@ -48,7 +48,7 @@
 	Das Produkt soll keine Software werden, mit welcher die Studenten untereinander verglichen werden. Dies kann gegebenen falls durch \acs{Add-On} ermöglicht werden, es gehört jedoch nicht zu diesem Projekt dazu. Des weiteren soll die Software kein Netzwerk darbieten in welchem unterschiedlichen Prüfer sich mit anderen austauschen können und die Prüfungsergebnisse untereinander vergleichen zu können.
 	
 \chapter{Produkteinsatz}
-	Der geplante Einsatz des Systems ist die Grundlage für Benutzungsoberfläche und Qualitätsanforderungen.
+	Der geplante Einsatz des Systems sind die Qualitätsanforderungen.
 	
 	\section{Anwendungsbereiche}
 	Das System soll vor allem zur Bewertung von Schülern und Studenten dienen. Es können jedoch auch andere Institutionen oder Firmen, welche ein einheitliches Bewertungssystem wollen, welches eine faire Bewertung ermöglicht. Es muss jedoch garantiert werden, dass keine fremden Personen Zugriff auf das System bekommen, da es sich bei solchen Bewertungen um teils sensible Informationen handelt. Studenten sollten die einfache Möglichkeit besitzen nachdem sie einen Test durchlaufen haben ihre Bewertung zu erfahren und diese auf einer einfachen Oberfläche teils grafisch dargestellt werden soll um einen Vergleich zu ermöglichen.
@@ -58,11 +58,14 @@
 		\item \underline{Prüfer:}\\
 	Der Prüfer ist der Ersteller sowie der Bearbeiter der Prüfung. Dieser muss sich sinnvolle Bewertungskriterien überlegen, sowie in das System eintragen. Der Prüfer benötigt alle Funktionen zum Eintragen der Bewertungen bzw. der Scores.
 	
-		\item \underline{Hochschulen:}\\
-	Das System soll transparent für verschiedene Hochschulen verwendet werden.  Die Bewertungskriterien sind einfach anpassbar an die jeweiligen Hochschulverordnungen. Zusätzlich sind individuelle Bewertungskriterien stets möglich.
+		\item \underline{Verwalter (Admin):}\\
+	Der Verwalter besitzt die Rechte zur Erstellung sowie Löschung der Benutzer. Zusätzlich kann er Benutzergruppe erstellen sowie die Benutzer in die jeweiligen Benutzergruppen zuordnen. Entweder ist der Benutzer ein Student oder Dozent / Prüfer. Der Verwalter kann zusätzlich die Bewertungen verwalten.
 			
 		\item \underline{Verwaltung:}\\
 	Die Verwaltung benötigt Zugriff auf das System um die Score auslesen zu können. Diese werden in einem Archiv abgespeichert und für 10 Jahre hinterlegt. 	
+	
+	\item \underline{Dozent:}\\
+	Der Dozent besitzt die gleichen Rechte wie der Prüfer.
 		
 	\end{itemize}
 
@@ -74,24 +77,23 @@
 	
 	\item \underline{Tägliche Betriebszeit:} \\
 	Der Server auf dem die Daten hinterlegt sind muss immer verfügbar sein, damit die Prüfer wie auch die Prüflinge jederzeit mit der Anwendung Zugriff haben.
+	Ein reduziertes Programm (Prototyp) wird vor dem eigentlichen Programm entwickelt.
 		
 	\item \underline{Betrieb:} \\
 	Es ist ein unbeaufsichtigter Betrieb vorgesehen. Sobald der Server einmal installiert ist, sollte das System ohne weitere Konfigurationen funktionieren. Der Prüfer sollte sich nicht mit der Konfiguration des System belasten müssten. 	
 	\end{itemize}
 	
 \chapter{Produktübersicht}
+	Im Folgenden auf Abb~\ref{fig:usecase} wird der Use-Case des Programmes dargestellt. Es werden die einzelnen Funktionen der verschiedenen Akteure dargestellt.
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=0.99\textwidth]{../Diagramme/Use_Case.pdf}
 		\caption{Use-Case Szenario}
+		\label{fig:usecase}
 	\end{figure}
 
 \chapter{Produktfunktionen}
-	\begin{figure}[H]
-		\centering
-		\includegraphics[height=0.8\textheight]{../Diagramme/Beispielprozess.pdf}
-		\caption{Beispielprozess einer Bewertung}
-	\end{figure}
+	
 	
 \chapter{Produktdaten}
 	In den Produktdaten sollten enthalten sein:
@@ -102,12 +104,24 @@
 		\item Die "`Endscores"' des Studenten
 		\item "`Zwischenscores"' 
 		\item Fach vom Score 
+		\item Name des Dozenten / Prüfer
+		\item Vorname des Dozenten / Prüfer
+		\item Dozenten\_ID / Prüfer\_ID
+		\item Score - Schemata
+		\item Prüfmuster
+
 	\end{itemize}
 	Insgesamt können von jedem Studenten mehrere Score eingetragen werden. Name, Vorname und Matrikelnummer sind nur einmal in der Datenbank hinterlegt um Redundanz zu verhindern. 
+	Die Datenbank sollte so dimensioniert werden, damit alle Datei genug Speicher besitzen bzw. folgende Daten ohne Problem gespeichert werden können. Als Richtwert werden ca. 10.000 Einträge gewählt. 
 	
 
 \chapter{Produktleistungen}
-	Die Software soll eine Stabilität enthalten, wodurch mehrere Studenten/Dozenten auf einmal darauf zugreifen können.
+	Die Software soll eine Stabilität enthalten, wodurch mehrere Studenten/Dozenten auf einmal darauf zugreifen können. Die Qualitätsanforderung sind Vormaussetzung um ein voll funktionsfähig Programm zu erstellen. Es müssen Schwerpunkte in diesem Programm gelegt werden.\\
+	
+	Es muss zwischen Funktionalität und Nicht-funktionale Anforderung unterschieden werden. Die Funktionalität ist entscheiden für das Programm. Nicht-funktionale Anforderung sind im ersten Schritt für das Grundprogramm nicht wichtig, können jedoch bei genügend Zeit hinzugefügt werden.\\
+	
+	Es wurde die ISO / IES Norm 9126 gewählt, um die Softwarequalität sicherzustellen. Diese Norm bezieht sich sehr auf die Qualität der Software als Produkt. Die Produktqualität ist entscheidend, damit das Programm voll funktionsfähig sein wird. 
+
 	
 \chapter{Qualitätsanforderungen}
 	\input{data/Qualitaetsanforderungen.tex}
@@ -136,14 +150,15 @@
 	\end{itemize}
 	
 \chapter{Benutzungsoberfläche}
+	Die Thema wird anfangs absichtlich etwas vernachlässigt. Das Design ist für funktionsfähig des Programmes erstmal nicht entscheidend.
 	\begin{itemize}
-		\item Intuitive Bedienung
-		\item Selbsterklärend
-		\item Ansprechendes Design
+ 
+		\item Desktop-Programm-Design nach "Java Look and Feel Design Guidelines"
+		\item IOs App nach "Apple Design Guidelines"
 	\end{itemize}
 	
 \chapter{Technische Produktumgebung}
-	Auf dem Server wird eine CouchDB-Datenbank verwendet. Auf der Clientseite wird ein Java–Programm installiert. Da wir in der Vergangenheit sehr gute Ergebnisse mit Java erzielt haben und eine CouchDB-Datenbank für dieses Projekt sehr sinnvoll erscheint, da es mit der Datenmenge gut zurrecht kommt und noch performant genug ist.
+	Auf dem Server wird eine CouchDB-Datenbank verwendet. Auf der Clientseite wird ein Java–Programm installiert.
 	
 	\section{Software}
 	\begin{itemize}
@@ -175,6 +190,7 @@
 	
 	\section{Software}
 	Als Software für die Entwicklung wird Windows 7 und Mac OSX 10.10 verwendet, da diese Systeme zur Verfügung stehen. Des weiteren wird Eclipse als IDE für Java verwendet. Um die Daten abzulegen wird eine CouchDB Datenbank verwendet.
+	Da wir in der Vergangenheit sehr gute Ergebnisse mit Java erzielt haben und eine CouchDB-Datenbank für dieses Projekt sehr sinnvoll erscheint, da es mit der Datenmenge gut zurecht kommt und noch performant genug ist.
 	\section{Hardware}
 	Windows 7\\
 	
@@ -192,17 +208,10 @@
 
 	
 \chapter{Gliederung in Teilprodukte}
-	Drei Teilprodukte
-	\begin{itemize}
-		\item Logik 
-			\begin{itemize}
-				\item Zweistufige holistische Bewertung (H2)
-				\item Rate-to-Score (R2S)
-				\item Score-to-Rate (S2R)
-			\end{itemize}
-		\item GUI
-		\item Backend (Datenbankanbindung inkl. Benutzerauthentifizierung)
-	\end{itemize}
+	Drei Teilprodukte die nacheinander fertiggestellt werden. Die zweistufige holistische Bewertung (H2) / Rate-to-Score (R2S) sowie Score-to-Rate (S2R) soll als erstes fertiggestellt werden, damit soll die Kernfunktionalität vorhanden ist. \\
+	Der zweite Schritt ist die Datenbankanbindung inkl. der Benutzerauthentifizierung.\\
+	Der letzte Schritt ist die Benutzerschnittstelle (GUI). Für die Desktop Version muss eine andere Gui erstellt werden als für die Mobile Version.
+
 
 %\chapter{Ergänzungen}	
 %	In diesem Kapitel werden Ergänzungen sowie spezielle Anforderungen beschrieben die über die aufgeführten Kapitel 1 bis 12 hinausgehen. Beispielsweise können hier Installationsbedingungen festgelegt werden wie:\\
@@ -239,7 +248,7 @@
 		\includegraphics[width=0.99\textwidth]{data/Aufwandsabschaetzung.pdf}
 	\end{figure}
 	
-	\section{Datenflussdiagramme}
+	\section{Datenflussdiagramme sowie weite Diagramme}
 	\begin{figure}
 		\centering
 		\includegraphics[width=0.7\textwidth]{img/DTD_1_BewerterStudent.pdf}
@@ -255,6 +264,33 @@
 		\includegraphics[width=0.7\textwidth]{img/DTD_3_H2SR.pdf}
 		\caption{Datenfluss Umrechnung S2R, H2, R2S}
 	\end{figure}
+	\begin{figure}
+		\centering
+		\includegraphics[height=0.8\textheight]{../Diagramme/Beispiel-FlussdiagrPraesi.pdf}
+		\caption{Beispielprozess einer Bewertung einer Präsentation}
+	\end{figure}
+	Data Flow Diagramme
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.8\textwidth]{../Diagramme/Kontextdiagramm_DFD0.pdf}
+		\caption{Kontextdiagramm}
+	\end{figure}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.8\textwidth]{../Diagramme/Kontextdiagramm_DFD2_Bewerter.pdf}
+		\caption{Datenflussdiagramm Bewerter}
+	\end{figure}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.8\textwidth]{../Diagramme/Kontextdiagramm_DFD2_Student.pdf}
+		\caption{Datenflussdiagramm Student}
+	\end{figure}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.8\textwidth]{../Diagramme/Kontextdiagramm_DFD2_Verwalter.pdf}
+		\caption{Datenflussdiagramm Student}
+	\end{figure}
+	
 	
 	
 	\listoftables
