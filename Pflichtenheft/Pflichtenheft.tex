@@ -32,10 +32,12 @@
 \begin{document}
 	\input{titlepage/titlepage.tex}
 	
+	\pagenumbering{Roman}
 	% Platzierung des Inhaltsverzeichnisses
 	\tableofcontents
 	
 \chapter{Zielbestimmung}
+\pagenumbering{arabic}
 	Das im Folgenden beschriebene Programm soll die Grundlage für ein Bewertungssystem für Prüfer sein. Mit diesem System soll eine gerechte und einfache Bewertung ermöglicht werden. Dies wird sichergestellt indem die einzelnen Bewertungen auf einen gemeinsamen Score umgerechnet werden. Zusätzlich ist dieses System so aufgebaut, dass es sich sehr leicht an neuen Prüfungsbedingungen anpassen lässt. Durch verschiedene Gewichtungen der Scores ergibt sich die Möglichkeit einzelne Bewertungen stärker zu werten als andere. Eine weitere Funktionalität des Programmes soll es dem Prüfer ermöglichen zum Score ebenfalls eine Rückmeldung anzuhängen um dem Prüfling ein Feedback zu geben. Genau so soll der Prüfling (ggf. Student) ein Feedback anfordern können um eine Begründung zu für seine Bewertung erhalten zu können.
 	
 	\section{Musskriterien}
@@ -223,7 +225,13 @@
 %	Vorschriften\\
 %	Patente und\\
 %	Lizenzen aufgeführt werden.
-	
+
+\newpage
+\appendix
+
+\setcounter{page}{1}
+\renewcommand{\thepage}{\arabic{page}}
+
 \chapter{Anhang}
 \appendix
 	\section{Begriffsdefinitionen}
@@ -243,51 +251,37 @@
 	
 	\section{Aufwandsabschätzung}
 	%Aufwandsabschätzungstabelle einfügen
+
 	\begin{figure}
 		\centering
-		\includegraphics[width=0.99\textwidth]{data/Aufwandsabschaetzung.pdf}
+		\includegraphics[width=0.9\textwidth]{data/Aufwandsabschaetzung.pdf}
 	\end{figure}
 	
 	\section{Datenflussdiagramme sowie weite Diagramme}
-	\begin{figure}
+
+	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.7\textwidth]{img/DTD_1_BewerterStudent.pdf}
-		\caption{Datenfluss Bewerter-Student}
-	\end{figure}
-	\begin{figure}
-		\centering
-		\includegraphics[width=0.7\textwidth]{img/DTD_2_JavaDB.pdf}
-		\caption{Datenfluss Java-Datenbank}
-	\end{figure}
-	\begin{figure}
-		\centering
-		\includegraphics[width=0.7\textwidth]{img/DTD_3_H2SR.pdf}
-		\caption{Datenfluss Umrechnung S2R, H2, R2S}
-	\end{figure}
-	\begin{figure}
-		\centering
-		\includegraphics[height=0.8\textheight]{../Diagramme/Beispiel-FlussdiagrPraesi.pdf}
+		\includegraphics[height=0.9\textheight]{../Diagramme/Beispiel-FlussdiagrPraesi.pdf}
 		\caption{Beispielprozess einer Bewertung einer Präsentation}
 	\end{figure}
-	Data Flow Diagramme
-	\begin{figure}
+	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.8\textwidth]{../Diagramme/Kontextdiagramm_DFD0.pdf}
+		\includegraphics[width=1.4\textwidth, angle=90, origin=c]{../Diagramme/Kontextdiagramm_DFD0.pdf}
 		\caption{Kontextdiagramm}
 	\end{figure}
-	\begin{figure}
+	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.8\textwidth]{../Diagramme/Kontextdiagramm_DFD2_Bewerter.pdf}
+		\includegraphics[width=1.4\textwidth, angle=90, origin=c]{../Diagramme/Kontextdiagramm_DFD2_Bewerter.pdf}
 		\caption{Datenflussdiagramm Bewerter}
 	\end{figure}
-	\begin{figure}
+	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.8\textwidth]{../Diagramme/Kontextdiagramm_DFD2_Student.pdf}
+		\includegraphics[width=1.4\textwidth, angle=90, origin=c]{../Diagramme/Kontextdiagramm_DFD2_Student.pdf}
 		\caption{Datenflussdiagramm Student}
 	\end{figure}
-	\begin{figure}
+	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.8\textwidth]{../Diagramme/Kontextdiagramm_DFD2_Verwalter.pdf}
+		\includegraphics[width=1.4\textwidth, angle=90, origin=c]{../Diagramme/Kontextdiagramm_DFD2_Verwalter.pdf}
 		\caption{Datenflussdiagramm Student}
 	\end{figure}
 	
