@@ -8,14 +8,9 @@ import org.lightcouch.CouchDbClient;
 public class MainClass {
 
 	public static void main(String[] args){
-		CouchDbClient connection = new CouchDbClient("scoreos", false, "http", "127.0.0.1", 5984, null, null);
-		Calendar heute = new GregorianCalendar(2014,11,6);
-		String zwei;
-		System.out.println(heute.get(Calendar.YEAR));
-		System.out.println(heute.get(Calendar.MONTH));
-		System.out.println(heute.get(Calendar.DAY_OF_MONTH));
-		WriteJSON writer = new WriteJSON(connection);
-		writer.neueEinzelBewertung("Testbewertung", heute, "testID");
+
+		Student test = new Student("Christian", "Gmeiner", 28, 8, 1994, "TINF13IN");
+		System.out.println(test.getStudentAsJSONObject().toString());
 	}
 	
 }
