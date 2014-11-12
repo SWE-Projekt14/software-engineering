@@ -21,7 +21,7 @@ Pflichtenheft.pdf
 *.dmg
 *.gz
 *.iso
-*.jar
+.jar
 *.rar
 *.tar
 *.zip
