@@ -16,10 +16,13 @@ import org.lightcouch.NoDocumentException;
 public class Student {
 	private JSONObject studentJSON = new JSONObject();
 	private CouchDbClient connection;
+	private CouchDbProperties properties;
 	
 	public Student(String stVorName, String stNachName, int GebTag, int GebMonat, int GebJahr, 
-					String stKurs){
-	
+					String stKurs, CouchDbProperties dbInfos){
+		
+		properties = dbInfos;
+		
 		StringBuilder stGebDatum = new StringBuilder();
 		stGebDatum.append(GebJahr);
 		stGebDatum.append("-");
@@ -34,7 +37,8 @@ public class Student {
 		studentJSON.put("_id", getStudentID());
 		
 		JSONObject kurse = new JSONObject();
-		studentJSON.put("Vorlesungen", kurse);	
+		studentJSON.put("Vorlesungen", kurse);
+		saveStudentJSON();
 	}
 
 	public String getStudentID(){
@@ -105,7 +109,7 @@ public class Student {
 //		return (JSONArray) kurseJson.getJsonArray(vorlesungID);
 	}
 	
-	public void addTestat(Testat testat, String vorlesungID, CouchDbProperties properties){
+	public void addTestat(Testat testat, String vorlesungID){
 		JSONObject alleVorlesungenJSON = (JSONObject) studentJSON.get("Vorlesungen");
 		WriteJSON connection = new WriteJSON();
 		JSONObject vorlesungJSON = (JSONObject) alleVorlesungenJSON.get(vorlesungID);
@@ -116,5 +120,10 @@ public class Student {
 	
 	public void addStdKurse(){
 		
+	}
+	
+	private void saveStudentJSON(){
+		WriteJSON connection = new WriteJSON();
+		connection.speichereJSONinDB(studentJSON, properties);
 	}
 }

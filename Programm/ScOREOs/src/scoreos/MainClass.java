@@ -11,7 +11,7 @@ public class MainClass {
 	public static void main(String[] args){
 		CouchDbProperties properties = new CouchDbProperties("scoreos", false, "http", "127.0.0.1", 5984, null, null);
 		
-		Student test = new Student("Christian", "Gmeiner", 28, 8, 1994, "TINF13IN");
+		Student test = new Student("Christian", "Gmeiner", 28, 8, 1994, "TINF13IN", properties);
 		System.out.println(test.getStudentAsJSONObject());
 		System.out.println(test.getStKurs().toString());
 		test.addVorlesung("Software Engineering");
@@ -22,8 +22,8 @@ public class MainClass {
 		Testat zwei = new Testat("Pflichtenheft");
 		zwei.addBewertung(80, true, "Cover");
 		zwei.addBewertung(60, false, "Inhalt");
-		test.addTestat(zwei, "Mathematik", properties);
-		test.addTestat(eins, "Software Engineering", properties);
+		test.addTestat(zwei, "Mathematik");
+		test.addTestat(eins, "Software Engineering");
 	}
 	
 }

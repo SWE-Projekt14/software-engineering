@@ -44,7 +44,7 @@
 	Die Software muss eine korrekte Umrechnung der Bewertungen in gültige Scores beherrschen, welche die Prüfer eintragen. Da es sich bei diesen um teilweise sensible Daten handelt, müssen diese gut geschützt sein, sodass sie von außerhalb nicht verändert werden können. Dieses Programm bietet die Möglichkeit durch ein zweistufiges holistisches Bewertungssystem die Bewertungen einzutragen. Bei diesem zweistufigen System kann der Prüfer die Stufen selbst so gewichten wie er es für sinnvoll hält. Mehrere Bewertungen können miteinander verrechnet und einzeln gewichtet werden. Am Ende soll der Prüfer ein Score bekommen, welcher sich aus seinen Bewertungen und Gewichtungen errechnen lässt. Die Software muss auf Windows PCs lauffähig sein, da dies die am meisten verwendete Laufzeitumgebung ist. Des weiteren muss das System einfach zu bedienen sein. Der Prüfer muss die Ergebnis seiner Bewertung einfach an die Studenten weiter geben können. Dies kann durch einen Ausdruck dieser statt finden wie auch durch ein eigenes Programm welches den Studenten Zugriff auf die jeweiligen Scores liefert. Umrechnung von der Inversen muss auch voll funktionsfähig sein. 
 	
 	\section{Wunschkriterien}
-	Das Grundprogramm soll wie ein Gerüst dienen, sodass man verschiedene \acs{Add-On} einbinden kann. Dieses Zusatzapplikationen können weitere Bewertungsmöglichkeiten beziehungsweise Umrechnungen zwischen diesen Bewertungen sein. Es kann sich dabei auch um eine Anbindung an bestehende Systeme verschiedener anderer Anbieter handeln. Später, wenn das Backend funktionsfähig ist, soll durch eine Website ein Zugriff ermöglicht werden um von Mobilen Endgeräte oder jedem anderen Gerät welches einen Browser besitzt darauf zugreifen zu können. Des weiteren soll eine \ac{API} implementiert werden, mit welcher andere Programme mit diesem Programm kommunizieren können. Es soll eine iOS App erstellt werden um bequem von iPad/iPhone darauf zugreifen zu können.
+	Das Grundprogramm soll wie ein Gerüst dienen, sodass man verschiedene \ac{Add-On} einbinden kann. Dieses Zusatzapplikationen können weitere Bewertungsmöglichkeiten beziehungsweise Umrechnungen zwischen diesen Bewertungen sein. Es kann sich dabei auch um eine Anbindung an bestehende Systeme verschiedener anderer Anbieter handeln. Später, wenn das Backend funktionsfähig ist, soll durch eine Website ein Zugriff ermöglicht werden um von Mobilen Endgeräte oder jedem anderen Gerät welches einen Browser besitzt darauf zugreifen zu können. Des weiteren soll eine \ac{API} implementiert werden, mit welcher andere Programme mit diesem Programm kommunizieren können. Es soll eine iOS App erstellt werden um bequem von iPad/iPhone darauf zugreifen zu können.
 	
 	\section{Abgrenzungskriterien}
 	Das Produkt soll keine Software werden, mit welcher die Studenten untereinander verglichen werden. Dies kann gegebenen falls durch \acs{Add-On} ermöglicht werden, es gehört jedoch nicht zu diesem Projekt dazu. Des weiteren soll die Software kein Netzwerk darbieten in welchem unterschiedlichen Prüfer sich mit anderen austauschen können und die Prüfungsergebnisse untereinander vergleichen zu können.
@@ -93,9 +93,9 @@
 		\caption{Use-Case Szenario}
 		\label{fig:usecase}
 	\end{figure}
-
-\chapter{Produktfunktionen}
 	
+%Produktfunktionen einfügen		
+	\input{Produktfunktionen.tex}
 	
 \chapter{Produktdaten}
 	In den Produktdaten sollten enthalten sein:
@@ -126,9 +126,7 @@
 
 	
 \chapter{Qualitätsanforderungen}
-	\input{data/Qualitaetsanforderungen.tex}
-	
-	
+	\input{data/Qualitaetsanforderungen.tex}	
 	
 	\begin{itemize}
 		\item Funktionalität:\\
