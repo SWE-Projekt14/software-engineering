@@ -2,110 +2,119 @@ package scoreos;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
 
 import javax.json.*;
 
+import org.json.JSONException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.lightcouch.CouchDbClient;
+import org.lightcouch.CouchDbProperties;
+import org.lightcouch.NoDocumentException;
 
 public class Student {
-	private String stVorName;
-	private String stNachName;
-	private Calendar stGebDatum;
-	private String stKurs;
 	private JSONObject studentJSON = new JSONObject();
+	private CouchDbClient connection;
 	
-	public Student(String Vorname, String Nachname, int GebTag, int GebMonat, int GebJahr, 
-					String Kurs){
+	public Student(String stVorName, String stNachName, int GebTag, int GebMonat, int GebJahr, 
+					String stKurs){
 	
-		stVorName = Vorname;
-		stNachName = Nachname;
-		stGebDatum = new GregorianCalendar(GebJahr, GebMonat, GebTag);
-		stKurs = Kurs;
+		StringBuilder stGebDatum = new StringBuilder();
+		stGebDatum.append(GebJahr);
+		stGebDatum.append("-");
+		stGebDatum.append(GebMonat);
+		stGebDatum.append("-");
+		stGebDatum.append(GebTag);
 		
-		studentJSON.put("_id", getStudentID());
 		studentJSON.put("Vorname", stVorName);
 		studentJSON.put("Nachname", stNachName);
 		studentJSON.put("Geburtsdatum", stGebDatum);
 		studentJSON.put("Kurs", stKurs);
+		studentJSON.put("_id", getStudentID());
 		
 		JSONObject kurse = new JSONObject();
-		studentJSON.put("Kurse", kurse);
+		studentJSON.put("Vorlesungen", kurse);	
 	}
 
-	public String getStKurs() {
-		return stKurs;
+	public String getStudentID(){
+		StringBuilder sb = new StringBuilder();
+		sb.append(studentJSON.get("Kurs"));
+		sb.append(studentJSON.get("Geburtsdatum"));
+		sb.append(studentJSON.get("Nachname").toString());
+		sb.append(studentJSON.get("Vorname").toString());
+		return sb.toString();
+	}
+
+	public void setStVorname(String stVorname){
+		studentJSON.remove("Vorname");
+		studentJSON.put("Vorname", stVorname);
+	}
+
+	public String getStVorName() {
+		return studentJSON.get("Vorname").toString();
+	}
+
+	public void setStNachName(String stNachname) {
+		studentJSON.remove("Nachname");
+		studentJSON.put("Nachname", stNachname);
+	}
+
+	public String getStNachName() {
+		return studentJSON.get("Nachname").toString();
+	}
+
+	public String getGebDatum(){
+		return studentJSON.get("Geburtsdatum").toString();
 	}
 
 	public void setStKurs(String stKurs) {
 		studentJSON.remove("Kurs");
 		studentJSON.put("Kurs", stKurs);
-		this.stKurs = stKurs;
 	}
 
-	public String getStNachName() {
-		return stNachName;
-	}
-	
-	public void setStNachName(String stNachname) {
-		studentJSON.remove("Nachname");
-		studentJSON.put("Nachname", stNachname);
-		this.stNachName = stNachname;
+	public String getStKurs() {
+		return studentJSON.get("Kurs").toString();
 	}
 
-	public String getStVorName() {
-		return stVorName;
+	public void addVorlesung(String vorlesungID){
+		JSONObject kurseJSON = (JSONObject)studentJSON.get("Vorlesungen");
+		JSONObject vorlesungJSON = new JSONObject();
+		kurseJSON.put(vorlesungID, vorlesungJSON);
 	}
-	
-	public void setStVorname(String stVorname){
-		studentJSON.remove("Vorname");
-		studentJSON.put("Vorname", stVorname);
-		this.stVorName = stVorname;
+
+	public JSONObject getAlleVorlesungen(){
+		return (JSONObject) studentJSON.get("Vorlesungen");
 	}
-	
+
 	public JSONObject getStudentAsJSONObject(){
 		return studentJSON;
 	}
 	
-	public String getGebDatum(){
-		StringBuilder sb = new StringBuilder();
-		sb.append(stGebDatum.get(Calendar.YEAR));
-		sb.append("-");
-		sb.append(stGebDatum.get(Calendar.MONTH));
-		sb.append("-");
-		sb.append(stGebDatum.getActualMaximum(Calendar.DAY_OF_MONTH));
-		return sb.toString();
+	public String getReversionNummer(){
+		return studentJSON.get("_rev").toString();
+	}
+
+	public void getTestateVorlesung(String vorlesungID){
+		JSONObject vorlesungenJSON = (JSONObject) studentJSON.get("Vorlesungen");
+		Iterator<JSONObject> iterator = vorlesungenJSON.values().iterator();
+		while (iterator.hasNext()) {
+			System.out.println(iterator.next().get(vorlesungID));
+			
+		}
+//		return (JSONArray) kurseJson.getJsonArray(vorlesungID);
 	}
 	
-	public void addVorlesung(String vorlesungID){
-		JSONObject kurseJSON = (JSONObject)studentJSON.get("Kurse");
-		JSONObject vorlesungJSON = new JSONObject();
-		kurseJSON.put(vorlesungID, vorlesungJSON);
-	}
-	
-	public JSONArray getVorlesungTestate(String vorlesungID){
-		JsonObject kurseJson = (JsonObject) studentJSON.get("Kurse");
-		return (JSONArray) kurseJson.getJsonArray(vorlesungID);
-	}
-	
-	public void addTestat(String testatID, String testatDokID, String vorlesungID){
-		JSONObject kurseJSON = (JSONObject) studentJSON.get("Kurse");
-		JSONObject vorlesungJSON = (JSONObject) kurseJSON.get(vorlesungID);
-		vorlesungJSON.put(testatID, testatDokID);
+	public void addTestat(Testat testat, String vorlesungID, CouchDbProperties properties){
+		JSONObject alleVorlesungenJSON = (JSONObject) studentJSON.get("Vorlesungen");
+		WriteJSON connection = new WriteJSON();
+		JSONObject vorlesungJSON = (JSONObject) alleVorlesungenJSON.get(vorlesungID);
+		
+		vorlesungJSON.put(testat.getTestatTitel(), 
+				connection.speichereJSONinDB(testat.getTestatAlsJSON(), properties).getId());
 	}
 	
 	public void addStdKurse(){
 		
-	}
-	
-	public String getStudentID(){
-		StringBuilder sb = new StringBuilder();
-		sb.append(stKurs);
-		sb.append(stGebDatum.get(Calendar.YEAR));
-		sb.append(stGebDatum.get(Calendar.MONTH));
-		sb.append(stGebDatum.get(Calendar.DAY_OF_MONTH));
-		sb.append(stNachName);
-		sb.append(stVorName);
-		return sb.toString();
 	}
 }

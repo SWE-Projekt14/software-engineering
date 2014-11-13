@@ -7,6 +7,7 @@ import org.json.simple.JSONObject;
 import org.lightcouch.CouchDbClient;
 import org.lightcouch.CouchDbProperties;
 import org.lightcouch.DocumentConflictException;
+import org.lightcouch.Response;
 
 public class WriteJSON {
 	
@@ -55,6 +56,16 @@ public class WriteJSON {
 	public void fuegeStudentenHinzu(Student studenten, CouchDbProperties datenbank){
 		connection = new CouchDbClient(datenbank);
 		
+	}
+	
+	public Response speichereJSONinDB(JSONObject jsonObject, CouchDbProperties properties){
+		connection = new CouchDbClient(properties);
+		try{
+			return connection.save(jsonObject);
+		}catch(DocumentConflictException e){
+			System.out.println("Fehler beim speichern von JSON Dokument");
+			return null;
+		}
 	}
 
 }
