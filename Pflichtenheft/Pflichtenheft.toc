@@ -29,5 +29,5 @@
 \contentsline {section}{\numberline {.2}Abk\IeC {\"u}rzungsverzeichnis}{1}{section.Alph0.2}
 \contentsline {section}{\numberline {.3}Abbildungsverzeichnis}{1}{section.Alph0.3}
 \contentsline {section}{\numberline {.4}Aufwandsabsch\IeC {\"a}tzung}{4}{section.Alph0.4}
-\contentsline {section}{\numberline {.5}Datenflussdiagramme sowie weite Diagramme}{4}{section.Alph0.5}
+\contentsline {section}{\numberline {.5}Datenflussdiagramme sowie weitere Diagramme}{4}{section.Alph0.5}
 \contentsline {section}{\numberline {.6}Tabellenverzeichnis}{9}{section.Alph0.6}

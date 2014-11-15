@@ -16,13 +16,10 @@ import org.lightcouch.NoDocumentException;
 public class Student {
 	private JSONObject studentJSON = new JSONObject();
 	private CouchDbClient connection;
-	private CouchDbProperties properties;
 	
 	public Student(String stVorName, String stNachName, int GebTag, int GebMonat, int GebJahr, 
-					String stKurs, CouchDbProperties dbInfos){
-		
-		properties = dbInfos;
-		
+					String stKurs){
+				
 		StringBuilder stGebDatum = new StringBuilder();
 		stGebDatum.append(GebJahr);
 		stGebDatum.append("-");
@@ -38,7 +35,8 @@ public class Student {
 		
 		JSONObject kurse = new JSONObject();
 		studentJSON.put("Vorlesungen", kurse);
-		saveStudentJSON();
+		connection = new CouchDbClient("couchdb.properties");
+		connection.save(studentJSON);
 	}
 
 	public String getStudentID(){
@@ -111,19 +109,19 @@ public class Student {
 	
 	public void addTestat(Testat testat, String vorlesungID){
 		JSONObject alleVorlesungenJSON = (JSONObject) studentJSON.get("Vorlesungen");
-		WriteJSON connection = new WriteJSON();
+		connection = new CouchDbClient("couchdb.properties");
 		JSONObject vorlesungJSON = (JSONObject) alleVorlesungenJSON.get(vorlesungID);
 		
 		vorlesungJSON.put(testat.getTestatTitel(), 
-				connection.speichereJSONinDB(testat.getTestatAlsJSON(), properties).getId());
+				connection.save(testat.getTestatAlsJSON()).getId());
 	}
 	
 	public void addStdKurse(){
 		
 	}
 	
-	private void saveStudentJSON(){
-		WriteJSON connection = new WriteJSON();
-		connection.speichereJSONinDB(studentJSON, properties);
+	private void updateStudentJSON(){
+		connection = new CouchDbClient("couchdb.properties");
+		connection.update(studentJSON);
 	}
 }

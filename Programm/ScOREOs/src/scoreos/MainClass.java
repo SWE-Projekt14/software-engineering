@@ -11,7 +11,7 @@ public class MainClass {
 	public static void main(String[] args){
 		CouchDbProperties properties = new CouchDbProperties("scoreos", false, "http", "127.0.0.1", 5984, null, null);
 		
-		Student test = new Student("Christian", "Gmeiner", 28, 8, 1994, "TINF13IN", properties);
+		Student test = new Student("Christian", "Gmeiner", 28, 8, 1994, "TINF13IN");
 		System.out.println(test.getStudentAsJSONObject());
 		System.out.println(test.getStKurs().toString());
 		test.addVorlesung("Software Engineering");
