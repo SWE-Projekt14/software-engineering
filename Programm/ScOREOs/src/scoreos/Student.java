@@ -11,45 +11,58 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.lightcouch.CouchDbClient;
 import org.lightcouch.CouchDbProperties;
+import org.lightcouch.DocumentConflictException;
 import org.lightcouch.NoDocumentException;
 
 public class Student {
 	private JSONObject studentJSON = new JSONObject();
-	private CouchDbClient connection;
+	private CouchDbClient connection = new CouchDbClient("couchdb.properties");
+	String revID;
 	
-	public Student(String stVorName, String stNachName, int GebTag, int GebMonat, int GebJahr, 
-					String stKurs){
-				
-		StringBuilder stGebDatum = new StringBuilder();
-		stGebDatum.append(GebJahr);
-		stGebDatum.append("-");
-		stGebDatum.append(GebMonat);
-		stGebDatum.append("-");
-		stGebDatum.append(GebTag);
-		
+	public void createStudent(String stVorName, String stNachName, Calendar stGebDatum, String stKurs){
+
 		studentJSON.put("Vorname", stVorName);
 		studentJSON.put("Nachname", stNachName);
-		studentJSON.put("Geburtsdatum", stGebDatum);
+		studentJSON.put("Geburtsdatum", getGebDatumString(stGebDatum));
 		studentJSON.put("Kurs", stKurs);
-		studentJSON.put("_id", getStudentID());
+		studentJSON.put("_id", getStudentID(stVorName, stNachName, stGebDatum, stKurs));
 		
 		JSONObject kurse = new JSONObject();
 		studentJSON.put("Vorlesungen", kurse);
-		connection = new CouchDbClient("couchdb.properties");
-		connection.save(studentJSON);
+		revID = connection.save(studentJSON).getRev();
 	}
 
-	public String getStudentID(){
+	public String getStudentID(String stVorName, String stNachName, Calendar stGebDatum, String stKurs){
 		StringBuilder sb = new StringBuilder();
-		sb.append(studentJSON.get("Kurs"));
-		sb.append(studentJSON.get("Geburtsdatum"));
-		sb.append(studentJSON.get("Nachname").toString());
-		sb.append(studentJSON.get("Vorname").toString());
+		sb.append(stKurs);
+		sb.append(getGebDatumString(stGebDatum));
+		sb.append(stNachName);
+		sb.append(stVorName);
 		return sb.toString();
+	}
+	
+	public void getStudentFromDB(String stVorName, String stNachName, Calendar stGebDatum, String stKurs){
+		String stID = getStudentID(stVorName, stNachName, stGebDatum, stKurs);
+		try {
+			studentJSON = connection.find(JSONObject.class, stID);
+			revID = studentJSON.get("_rev").toString();
+		} catch (NoDocumentException e) {
+			System.out.println("Kein Student mit "+stID+" vorhanden");
+		}
+	}
+	
+	private String getGebDatumString(Calendar stGebDatum){
+		StringBuilder stringDatum = new StringBuilder();
+		stringDatum.append(stGebDatum.get(Calendar.YEAR));
+		stringDatum.append("-");
+		stringDatum.append(stGebDatum.get(Calendar.MONTH));
+		stringDatum.append("-");
+		stringDatum.append(stGebDatum.get(Calendar.DAY_OF_MONTH));
+		return stringDatum.toString();
 	}
 
 	public void setStVorname(String stVorname){
-		studentJSON.remove("Vorname");
+		studentJSON.remove("Vorname"); // Wenn Name geändert wird muss auch ID geändert werden
 		studentJSON.put("Vorname", stVorname);
 	}
 
@@ -96,7 +109,7 @@ public class Student {
 	public String getReversionNummer(){
 		return studentJSON.get("_rev").toString();
 	}
-
+	
 	public void getTestateVorlesung(String vorlesungID){
 		JSONObject vorlesungenJSON = (JSONObject) studentJSON.get("Vorlesungen");
 		Iterator<JSONObject> iterator = vorlesungenJSON.values().iterator();
@@ -109,7 +122,6 @@ public class Student {
 	
 	public void addTestat(Testat testat, String vorlesungID){
 		JSONObject alleVorlesungenJSON = (JSONObject) studentJSON.get("Vorlesungen");
-		connection = new CouchDbClient("couchdb.properties");
 		JSONObject vorlesungJSON = (JSONObject) alleVorlesungenJSON.get(vorlesungID);
 		
 		vorlesungJSON.put(testat.getTestatTitel(), 
@@ -120,8 +132,13 @@ public class Student {
 		
 	}
 	
-	private void updateStudentJSON(){
-		connection = new CouchDbClient("couchdb.properties");
-		connection.update(studentJSON);
+	public void updateStudentJSON(){
+		studentJSON.remove("_rev");
+		studentJSON.put("_rev", revID);
+		try {
+			revID = connection.update(studentJSON).getRev();
+		} catch (DocumentConflictException e) {
+			System.out.println("Object Student wurde bearbeitet während Sie schreiben wollten, es wurde nichts übermittelt.");
+		}
 	}
 }

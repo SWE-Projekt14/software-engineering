@@ -9,21 +9,16 @@ import org.lightcouch.CouchDbProperties;
 public class MainClass {
 
 	public static void main(String[] args){
-		CouchDbProperties properties = new CouchDbProperties("scoreos", false, "http", "127.0.0.1", 5984, null, null);
+		Calendar gebDatum = new GregorianCalendar(1991, 5, 28);
+		Student test = new Student();
+//		test.createStudent("Alex", "Rezmer", gebDatum, "TINF13IN");
+		test.getStudentFromDB("Alex", "Rezmer", gebDatum, "TINF13IN");
+		test.setStVorname("Louis");
+		test.updateStudentJSON();
 		
-		Student test = new Student("Christian", "Gmeiner", 28, 8, 1994, "TINF13IN");
-		System.out.println(test.getStudentAsJSONObject());
-		System.out.println(test.getStKurs().toString());
-		test.addVorlesung("Software Engineering");
-		test.addVorlesung("Mathematik");
-		Testat eins = new Testat("Programm");
-		eins.addBewertung(98, true, "Code");
-		eins.addBewertung(30, false, "Umgebung");
-		Testat zwei = new Testat("Pflichtenheft");
-		zwei.addBewertung(80, true, "Cover");
-		zwei.addBewertung(60, false, "Inhalt");
-		test.addTestat(zwei, "Mathematik");
-		test.addTestat(eins, "Software Engineering");
+		test.setStNachName("Steinkampf");
+		test.updateStudentJSON();
+		System.out.println(test.getStVorName());
 	}
 	
 }
