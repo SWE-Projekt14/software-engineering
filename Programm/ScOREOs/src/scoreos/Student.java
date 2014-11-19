@@ -16,7 +16,7 @@ import org.lightcouch.NoDocumentException;
 
 public class Student {
 	private JSONObject studentJSON = new JSONObject();
-	private CouchDbClient connection = new CouchDbClient("couchdb.properties");
+	CouchDbClient connection;
 	String revID;
 	
 	public void createStudent(String stVorName, String stNachName, Calendar stGebDatum, String stKurs){
@@ -29,7 +29,6 @@ public class Student {
 		
 		JSONObject kurse = new JSONObject();
 		studentJSON.put("Vorlesungen", kurse);
-		revID = connection.save(studentJSON).getRev();
 	}
 
 	public String getStudentID(String stVorName, String stNachName, Calendar stGebDatum, String stKurs){
@@ -42,10 +41,14 @@ public class Student {
 	}
 	
 	public void getStudentFromDB(String stVorName, String stNachName, Calendar stGebDatum, String stKurs){
+		connection = new CouchDbClient("couchdb.properties");
 		String stID = getStudentID(stVorName, stNachName, stGebDatum, stKurs);
 		try {
 			studentJSON = connection.find(JSONObject.class, stID);
 			revID = studentJSON.get("_rev").toString();
+			studentJSON.remove("_rev");
+			studentJSON.put("_rev", revID);
+			
 		} catch (NoDocumentException e) {
 			System.out.println("Kein Student mit "+stID+" vorhanden");
 		}
@@ -115,12 +118,11 @@ public class Student {
 		Iterator<JSONObject> iterator = vorlesungenJSON.values().iterator();
 		while (iterator.hasNext()) {
 			System.out.println(iterator.next().get(vorlesungID));
-			
 		}
-//		return (JSONArray) kurseJson.getJsonArray(vorlesungID);
 	}
 	
 	public void addTestat(Testat testat, String vorlesungID){
+		connection = new CouchDbClient("couchdb.properties");
 		JSONObject alleVorlesungenJSON = (JSONObject) studentJSON.get("Vorlesungen");
 		JSONObject vorlesungJSON = (JSONObject) alleVorlesungenJSON.get(vorlesungID);
 		
@@ -128,11 +130,13 @@ public class Student {
 				connection.save(testat.getTestatAlsJSON()).getId());
 	}
 	
-	public void addStdKurse(){
-		
+	public void writeToDB(){
+		connection = new CouchDbClient("couchdb.properties");
+		connection.save(studentJSON);
 	}
 	
 	public void updateStudentJSON(){
+		connection = new CouchDbClient("couchdb.properties");
 		studentJSON.remove("_rev");
 		studentJSON.put("_rev", revID);
 		try {
