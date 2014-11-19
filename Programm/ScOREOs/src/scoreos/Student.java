@@ -1,8 +1,11 @@
 package scoreos;
 
+import java.lang.reflect.Type;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 import javax.json.*;
 
@@ -13,6 +16,10 @@ import org.lightcouch.CouchDbClient;
 import org.lightcouch.CouchDbProperties;
 import org.lightcouch.DocumentConflictException;
 import org.lightcouch.NoDocumentException;
+
+import com.google.gson.Gson;
+import com.google.gson.internal.LinkedTreeMap;
+import com.google.gson.reflect.TypeToken;
 
 public class Student {
 	private JSONObject studentJSON = new JSONObject();
@@ -44,10 +51,10 @@ public class Student {
 		connection = new CouchDbClient("couchdb.properties");
 		String stID = getStudentID(stVorName, stNachName, stGebDatum, stKurs);
 		try {
-			studentJSON = connection.find(JSONObject.class, stID);
+			JSONObject holeJSON = new JSONObject();
+			holeJSON = connection.find(JSONObject.class, stID);
+			studentJSON = holeJSON;
 			revID = studentJSON.get("_rev").toString();
-			studentJSON.remove("_rev");
-			studentJSON.put("_rev", revID);
 			
 		} catch (NoDocumentException e) {
 			System.out.println("Kein Student mit "+stID+" vorhanden");
@@ -96,9 +103,13 @@ public class Student {
 	}
 
 	public void addVorlesung(String vorlesungID){
-		JSONObject kurseJSON = (JSONObject)studentJSON.get("Vorlesungen");
-		JSONObject vorlesungJSON = new JSONObject();
-		kurseJSON.put(vorlesungID, vorlesungJSON);
+		Object alleVorlesungen = studentJSON.get("Vorlesungen");      
+		JSONObject object = (JSONObject) alleVorlesungen;
+		JSONObject neu = (JSONObject) object.get(vorlesungID);		
+		JSONObject neueVorlesung = new JSONObject();
+//		alleVorlesungen.put(vorlesungID, neueVorlesung);
+		studentJSON.remove("Vorlesungen");
+		studentJSON.put("Vorlesungen", alleVorlesungen);
 	}
 
 	public JSONObject getAlleVorlesungen(){
